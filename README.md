@@ -1,0 +1,2 @@
+# CASO-OTI_POO
+Trabajo grupal: PAULING, JHON, DENIS | SERIE 200 "A"
