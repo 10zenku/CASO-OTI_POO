@@ -1,4 +1,3 @@
-
 # SISTEMA ACADEMICO OTI
 # Programacion Orientada a Objetos (POO) - PRACTICA
 
@@ -8,12 +7,12 @@ class Curso:
     def __init__(self, codigo, nombre, creditos,
                  teoricas, practicas, seminario, virtuales):
         self._codigo = codigo
-        self.nombre = nombre
-        self.creditos = creditos
-        self.teoricas = teoricas
-        self.practicas = practicas
-        self.seminario = seminario
-        self.virtuales = virtuales
+        self._nombre = nombre
+        self._creditos = creditos
+        self._teoricas = teoricas
+        self._practicas = practicas
+        self._seminario = seminario
+        self._virtuales = virtuales
 
     @property
     def codigo(self):
@@ -86,8 +85,8 @@ class Curso:
             print("Las horas no pueden ser negativas")
 
     def total_horas(self):
-        return (self.teoricas + self.practicas +
-                self.seminario + self.virtuales)
+        return (self._teoricas + self._practicas +
+                self._seminario + self._virtuales)
 
     def validar_horas(self):
         print("Total de horas:", self.total_horas())
@@ -134,7 +133,7 @@ class Seccion:
         return self._matriculados
 
     def disponibles(self):
-        return self.vacantes - self.matriculados
+        return self._vacantes - self._matriculados
 
     def matricular(self):
         if self.disponibles() > 0:
@@ -144,7 +143,7 @@ class Seccion:
             print("No hay vacantes disponibles")
 
     def mostrar_datos(self):
-        print("turno:", self.codigo)
+        print("Turno:", self.codigo)
         print("Codigo del curso:", self.curso_codigo)
         print("Codigo del periodo:", self.periodo_codigo)
         print("Vacantes:", self.vacantes)
@@ -157,16 +156,16 @@ class PeriodoAcademico:
     def __init__(self, nombre, numero, año, inicio, fin,
                  matricula_inicio, matricula_fin, verano,
                  nota_minima, estado):
-        self.nombre = nombre
-        self.numero = numero
-        self.año = año
-        self.inicio = inicio
-        self.fin = fin
-        self.matricula_inicio = matricula_inicio
-        self.matricula_fin = matricula_fin
-        self.verano = verano
-        self.nota_minima = nota_minima
-        self.estado = estado
+        self._nombre = nombre
+        self._numero = numero
+        self._año = año
+        self._inicio = inicio
+        self._fin = fin
+        self._matricula_inicio = matricula_inicio
+        self._matricula_fin = matricula_fin
+        self._verano = verano
+        self._nota_minima = nota_minima
+        self._estado = estado
 
     @property
     def nombre(self):
@@ -198,21 +197,21 @@ class PeriodoAcademico:
             print("Intervalo de matricula no valido")
 
     def validar_fechas(self):
-        if self.inicio <= self.fin:
+        if self._inicio <= self._fin:
             print("Fechas del periodo correctas")
         else:
             print("La fecha final no puede ser anterior a la inicial")
 
     def mostrar_datos(self):
-        print("Nombre:", self.nombre)
-        print("Numero:", self.numero)
-        print("Año:", self.año)
-        print("Inicio:", self.inicio)
-        print("Fin:", self.fin)
-        print("Matricula inicio:", self.matricula_inicio)
-        print("Matricula fin:", self.matricula_fin)
-        print("Verano:", self.verano)
-        print("Nota minima:", self.nota_minima)
+        print("Nombre:", self._nombre)
+        print("Numero:", self._numero)
+        print("Año:", self._año)
+        print("Inicio:", self._inicio)
+        print("Fin:", self._fin)
+        print("Matricula inicio:", self._matricula_inicio)
+        print("Matricula fin:", self._matricula_fin)
+        print("Verano:", self._verano)
+        print("Nota minima:", self._nota_minima)
         print("Estado:", self.estado)
 
 
@@ -220,12 +219,12 @@ class PeriodoAcademico:
 class PlanEstudio:
     def __init__(self, nombre, año, obligatorios,
                  electivos, extracurriculares, vigente):
-        self.nombre = nombre
-        self.año = año  
-        self.obligatorios = obligatorios
-        self.electivos = electivos
-        self.extracurriculares = extracurriculares
-        self.vigente = vigente
+        self._nombre = nombre
+        self._año = año
+        self._obligatorios = obligatorios
+        self._electivos = electivos
+        self._extracurriculares = extracurriculares
+        self._vigente = vigente
 
     @property
     def nombre(self):
@@ -239,17 +238,17 @@ class PlanEstudio:
             print("Nombre vacio o demasiado largo")
 
     def total_creditos(self):
-        return (self.obligatorios + self.electivos +
-                self.extracurriculares)
+        return (self._obligatorios + self._electivos +
+                self._extracurriculares)
 
     def mostrar_datos(self):
         print("Nombre:", self.nombre)
-        print("Año:", self.año)
-        print("Obligatorios:", self.obligatorios)
-        print("Electivos:", self.electivos)
-        print("Extracurriculares:", self.extracurriculares)
+        print("Año:", self._año)
+        print("Obligatorios:", self._obligatorios)
+        print("Electivos:", self._electivos)
+        print("Extracurriculares:", self._extracurriculares)
         print("Total de creditos:", self.total_creditos())
-        print("Vigente:", self.vigente)
+        print("Vigente:", self._vigente)
 
 
 # 5. CLASE ESCUELA PROFESIONAL
@@ -257,7 +256,7 @@ class EscuelaProfesional:
     def __init__(self, codigo, nombre, informacion_general,
                  perfil_egresado, director_codigo, secretario_codigo):
         self._codigo = codigo
-        self.nombre = nombre
+        self._nombre = nombre
         self._informacion_general = informacion_general
         self._perfil_egresado = perfil_egresado
         self._director_codigo = director_codigo
@@ -291,7 +290,7 @@ class EscuelaProfesional:
 class Persona:
     def __init__(self, dni, nombres, apellidos):
         self._dni = dni
-        self.nombres = nombres
+        self._nombres = nombres
         self._apellidos = apellidos
 
     @property
@@ -314,10 +313,12 @@ class Persona:
         return self._apellidos
 
     def nombre_completo(self):
-        return self.nombres + " " + self.apellidos
+        return self._nombres + " " + self._apellidos
 
     def mostrar_rol(self):
-        raise NotImplementedError("La clase hija debe indicar el rol")
+        raise NotImplementedError(
+            "La clase hija debe indicar el rol"
+        )
 
     def mostrar_datos(self):
         print("DNI:", self.dni)
@@ -361,7 +362,10 @@ class Docente(Persona):
 # CREACION DE OBJETOS
 
 print("===== CURSO =====")
-curso1 = Curso("IS-282", "Programacion Orientada a Objetos", 4, 2, 2, 1, 1)
+curso1 = Curso(
+    "IS-282", "Programacion Orientada a Objetos",
+    4, 2, 2, 1, 1
+)
 curso1.mostrar_datos()
 curso1.validar_horas()
 
@@ -390,8 +394,9 @@ print("\n===== ESCUELA PROFESIONAL =====")
 escuela1 = EscuelaProfesional(
     "EPIS_2026",
     "Ingenieria de Sistemas",
-    "Formacion en computacion E informática",
-    "Profesional capaz de desarrollar y analizar software y sistemas informaticos",
+    "Formacion en computacion e informatica",
+    "Profesional capaz de desarrollar y analizar software "
+    "y sistemas informaticos",
     "27250001",
     "SEC22725"
 )
